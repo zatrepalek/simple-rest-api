@@ -7,8 +7,9 @@ use Silex\Application;
 use Silex\WebTestCase;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
 use UserApi\Configurator;
+use UserApi\Response\IResponse;
 
-class HomeTest extends WebTestCase
+class NotFoundTest extends WebTestCase
 {
     /**
      * Creates the application.
@@ -26,11 +27,11 @@ class HomeTest extends WebTestCase
         return $app;
     }
 
-    public function testHome()
+    public function testNotFound()
     {
         $client = $this->createClient();
-        $crawler = $client->request('GET', '/');
+        $client->request('GET', '/');
 
-        $this->assertTrue($client->getResponse()->isOk());
+        $this->assertEquals(IResponse::HTTP_CODE_NOT_FOUND, $client->getResponse()->getStatusCode());
     }
 }

@@ -4,6 +4,10 @@ declare(strict_types=1);
 namespace UserApi;
 
 use Silex\Application;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\Exception\HttpException;
+use UserApi\Response\IResponse;
+use UserApi\Response\SimpleResponse;
 
 class Configurator
 {
@@ -13,6 +17,7 @@ class Configurator
     public static function configure(Application $app): void
     {
         self::configureServices($app);
+        self::configureErrorHandling($app);
         self::configureRoutes($app);
     }
 
@@ -21,7 +26,27 @@ class Configurator
      */
     private static function configureServices(Application $app): void
     {
-        // TODO
+        $app['response.default'] = function () {
+            return new SimpleResponse();
+        };
+    }
+
+    /**
+     * @param Application $app
+     */
+    private static function configureErrorHandling(Application $app): void
+    {
+        $app->error(function (\Exception $e, Request $request, int $code) use ($app) {
+            $response = $app['response.default'];
+            if ($e instanceof HttpException) {
+                $response->setStatusCode($code);
+                $response->addError($e->getMessage());
+            } else {
+                $response->setStatusCode($code);
+                $response->addError(IResponse::MESSAGE_SERVER_ERROR);
+            }
+            return $response->build();
+        });
     }
 
     /**
@@ -29,6 +54,5 @@ class Configurator
      */
     private static function configureRoutes(Application $app): void
     {
-        $app->get('/', 'UserApi\\Controller\\UserController::default');
     }
 }
