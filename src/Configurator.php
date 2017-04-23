@@ -14,6 +14,7 @@ class Configurator
 {
     /**
      * @param Application $app
+     * @throws \InvalidArgumentException
      */
     public static function configure(Application $app): void
     {
@@ -24,6 +25,7 @@ class Configurator
 
     /**
      * @param Application $app
+     * @throws \InvalidArgumentException
      */
     private static function configureServices(Application $app): void
     {
