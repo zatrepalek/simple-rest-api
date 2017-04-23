@@ -51,6 +51,14 @@ class SimpleResponse extends Response
     }
 
     /**
+     * @param array $errors
+     */
+    public function addErrors(array $errors): void
+    {
+        $this->responseBody[self::KEY_ERRORS][] = $errors;
+    }
+
+    /**
      * @return Response
      */
     public function build(): Response

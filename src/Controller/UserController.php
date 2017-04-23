@@ -83,11 +83,7 @@ final class UserController
         );
 
         if ($violations !== []) {
-            foreach ($violations as $violationContainer) {
-                foreach ($violationContainer as $item) {
-                    $app['response.default']->addError($item);
-                }
-            }
+            $app['response.default']->addErrors($violations);
             $this->throwBadRequestException();
         }
 

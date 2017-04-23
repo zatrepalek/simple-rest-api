@@ -20,15 +20,18 @@ interface IResponse
     /**
      * @param string $key
      * @param mixed  $value
-     * @return mixed
      */
     public function set(string $key, mixed $value);
 
     /**
      * @param string $message
-     * @return mixed
      */
     public function addError(string $message);
+
+    /**
+     * @param array $errors
+     */
+    public function addErrors(array $errors);
 
     /**
      * @return Response
