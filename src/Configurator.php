@@ -77,5 +77,6 @@ class Configurator
         $app->get('/users/{id}', 'UserApi\\Controller\\UserController::handleGet');
         $app->get('/users', 'UserApi\\Controller\\UserController::handleList');
         $app->patch('/users/{id}', 'UserApi\\Controller\\UserController::handleUpdate');
+        $app->put('/users/{id}', 'UserApi\\Controller\\UserController::handleReplace');
     }
 }

@@ -156,4 +156,26 @@ final class UserController
         $response->setStatusCode(IResponse::HTTP_CODE_OK);
         return $response->build();
     }
+
+    /**
+     * @param Request     $request
+     * @param Application $app
+     * @return Response
+     * @throws \Symfony\Component\HttpKernel\Exception\HttpException
+     * @throws \LogicException
+     * @throws \InvalidArgumentException
+     */
+    public function handleReplace(Request $request, Application $app): Response
+    {
+        /** @var SimpleResponse $response */
+        $response = $app['response.default'];
+        $this->parseRequest($request);
+        $this->validateJson($app['json.validator'], 'UserReplaceRequest.json', $app['response.default']);
+
+        $row = $app['facades.user']->updateUser((array)$this->requestBody, (int)$request->get('id'));
+
+        $response->setResponseBody($row);
+        $response->setStatusCode(IResponse::HTTP_CODE_OK);
+        return $response->build();
+    }
 }
