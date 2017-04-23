@@ -5,6 +5,7 @@
         "stefk/jval": "dev-master"
     },
     "require-dev": {
-        "phpstan/phpstan": "^0.6.4"
+        "phpstan/phpstan": "^0.6.4",
+        "symfony/browser-kit": "^3.2"
     }
 }
