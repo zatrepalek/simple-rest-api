@@ -73,5 +73,6 @@ class Configurator
      */
     private static function configureRoutes(Application $app): void
     {
+        $app->post('/users', 'UserApi\\Controller\\UserController::handleCreate');
     }
 }
