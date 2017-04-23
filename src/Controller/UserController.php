@@ -95,4 +95,21 @@ final class UserController
         $response->headers->add(['Location' => $request->getBaseUrl() . '/customers/' . $id]);
         return $response->build();
     }
+
+    /**
+     * @param Request     $request
+     * @param Application $app
+     * @return Response
+     * @throws \InvalidArgumentException
+     */
+    public function handleGet(Request $request, Application $app): Response
+    {
+        /** @var SimpleResponse $response */
+        $response = $app['response.default'];
+        $row = $app['facades.user']->getUser((int)$request->get('id'));
+
+        $response->setResponseBody((array)$row);
+        $response->setStatusCode(IResponse::HTTP_CODE_OK);
+        return $response->build();
+    }
 }

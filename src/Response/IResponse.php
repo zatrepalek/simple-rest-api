@@ -13,6 +13,7 @@ interface IResponse
     const HTTP_CODE_BAD_REQUEST = 400;
     const MESSAGE_BAD_REQUEST = 'Bad request.';
     const HTTP_CODE_NOT_FOUND = 404;
+    const MESSAGE_NOT_FOUND = 'Resource not found.';
 
     const HTTP_CODE_SERVER_ERROR = 500;
     const MESSAGE_SERVER_ERROR = 'Internal server error.';
