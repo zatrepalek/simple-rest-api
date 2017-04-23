@@ -3,5 +3,8 @@
         "silex/silex": "^2.0",
         "nette/database": "^2.4",
         "stefk/jval": "dev-master"
+    },
+    "require-dev": {
+        "phpstan/phpstan": "^0.6.4"
     }
 }
