@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace UserApi;
 
+use JVal\Validator;
 use Lokhman\Silex\Provider\ConfigServiceProvider;
 use Nette\Database\Connection;
 use Silex\Application;
@@ -43,6 +44,9 @@ class Configurator
         };
         $app['facades.user'] = function () use ($app) {
             return new UserFacade($app['db']);
+        };
+        $app['json.validator'] = function () {
+            return Validator::buildDefault();
         };
     }
 
