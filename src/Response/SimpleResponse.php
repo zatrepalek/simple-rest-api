@@ -31,12 +31,11 @@ class SimpleResponse extends Response
     }
 
     /**
-     * @param string $key
-     * @param mixed  $value
+     * @param array $responseBody
      */
-    public function set(string $key, mixed $value): void
+    public function setResponseBody(array $responseBody): void
     {
-        $this->responseBody[$key] = $value;
+        $this->responseBody = $responseBody;
     }
 
     /**
@@ -52,9 +51,17 @@ class SimpleResponse extends Response
     }
 
     /**
-     * @return JsonResponse
+     * @param array $errors
      */
-    public function build(): JsonResponse
+    public function addErrors(array $errors): void
+    {
+        $this->responseBody[self::KEY_ERRORS][] = $errors;
+    }
+
+    /**
+     * @return Response
+     */
+    public function build(): Response
     {
         return new JsonResponse($this->responseBody, $this->statusCode, $this->headers->all());
     }
