@@ -1,0 +1,8 @@
+{
+  "env": "local",
+  "database": {
+    "dsn": "mysql:host=HOSTIP;dbname=DATABASENAME",
+    "user": "USERNAME",
+    "password": "PASSWORD"
+  }
+}

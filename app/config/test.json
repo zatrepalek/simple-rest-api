@@ -1,0 +1,8 @@
+{
+  "env": "test",
+  "database": {
+    "dsn": "mysql:host=HOSTIP",
+    "user": "USERNAME",
+    "password": "PASSWORD"
+  }
+}
