@@ -4,8 +4,52 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "7f6b38e0bfe33f5d6bcaa05f476bad7c",
+    "content-hash": "51012a85284713e39eddfcc86a8057a2",
     "packages": [
+        {
+            "name": "lokhman/silex-config",
+            "version": "2.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/lokhman/silex-config.git",
+                "reference": "4a290c9dfdd80a52d1c399e6d5dd448962a42215"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/lokhman/silex-config/zipball/4a290c9dfdd80a52d1c399e6d5dd448962a42215",
+                "reference": "4a290c9dfdd80a52d1c399e6d5dd448962a42215",
+                "shasum": ""
+            },
+            "require": {
+                "silex/silex": "~2.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^5.7 || ^6.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Lokhman\\Silex\\": "src/Silex"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Alexander Lokhman",
+                    "email": "alex.lokhman@gmail.com"
+                }
+            ],
+            "description": "Silex 2.0+ service provider for lightweight framework configuration",
+            "keywords": [
+                "config",
+                "silex",
+                "tools"
+            ],
+            "time": "2017-03-08T11:55:22+00:00"
+        },
         {
             "name": "nette/caching",
             "version": "v2.5.3",

@@ -15,7 +15,8 @@
     "require": {
         "silex/silex": "^2.0",
         "nette/database": "^2.4",
-        "stefk/jval": "dev-master"
+        "stefk/jval": "dev-master",
+        "lokhman/silex-config": "^2.0"
     },
     "require-dev": {
         "phpstan/phpstan": "^0.6.4",
