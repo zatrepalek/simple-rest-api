@@ -8,6 +8,7 @@ use Nette\Database\Connection;
 use Silex\Application;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\HttpException;
+use UserApi\Model\UserFacade;
 use UserApi\Response\IResponse;
 use UserApi\Response\SimpleResponse;
 
@@ -39,6 +40,9 @@ class Configurator
         $app['db'] = function () use ($app) {
             $config = $app['config']['database'];
             return new Connection($config['dsn'], $config['user'], $config['password']);
+        };
+        $app['facades.user'] = function () use ($app) {
+            return new UserFacade($app['db']);
         };
     }
 
