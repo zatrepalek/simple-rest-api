@@ -178,4 +178,14 @@ final class UserController
         $response->setStatusCode(IResponse::HTTP_CODE_OK);
         return $response->build();
     }
+
+    public function handleDelete(Request $request, Application $app): Response
+    {
+        /** @var SimpleResponse $response */
+        $response = $app['response.default'];
+        $app['facades.user']->deleteUser((int)$request->get('id'));
+
+        $response->setStatusCode(IResponse::HTTP_CODE_OK);
+        return $response->build();
+    }
 }

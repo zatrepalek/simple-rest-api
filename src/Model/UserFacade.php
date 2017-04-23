@@ -97,4 +97,20 @@ final class UserFacade
 
         return $row;
     }
+
+    /**
+     * @param int $id
+     * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
+     */
+    public function deleteUser(int $id): void
+    {
+        $result = $this->connection->query(
+            sprintf('DELETE FROM `%s` WHERE id=?', self::TABLE_USER),
+            $id
+        );
+
+        if ($result->getRowCount() !== 1) {
+            throw new NotFoundHttpException(IResponse::MESSAGE_NOT_FOUND);
+        }
+    }
 }
