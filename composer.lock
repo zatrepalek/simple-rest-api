@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "8b868c3c89237be03688c3cd8a9904f6",
+    "content-hash": "83b1bc8733c5cab60dc8206020effaa4",
     "packages": [
         {
             "name": "nette/caching",
@@ -427,6 +427,58 @@
             "time": "2016-11-06T18:09:06+00:00"
         },
         {
+            "name": "stefk/jval",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/stefk/JVal.git",
+                "reference": "1c26dd2c16e5273d1c0565ff6c9dc51e6316c564"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/stefk/JVal/zipball/1c26dd2c16e5273d1c0565ff6c9dc51e6316c564",
+                "reference": "1c26dd2c16e5273d1c0565ff6c9dc51e6316c564",
+                "shasum": ""
+            },
+            "require": {
+                "ext-mbstring": "*",
+                "php": ">=5.4.1"
+            },
+            "require-dev": {
+                "fabpot/php-cs-fixer": "~1.10",
+                "json-schema/json-schema": "dev-master",
+                "json-schema/test-suite": "dev-master",
+                "phpunit/phpunit": "~4.8"
+            },
+            "bin": [
+                "bin/jval"
+            ],
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "JVal\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Stéphane Klein",
+                    "email": "stephaneklein221@gmail.com"
+                }
+            ],
+            "description": "JSON Schema validator",
+            "homepage": "https://github.com/stefk/JVal",
+            "keywords": [
+                "JSON Schema",
+                "json",
+                "validation"
+            ],
+            "time": "2016-09-25 10:45:09"
+        },
+        {
             "name": "symfony/debug",
             "version": "v3.2.7",
             "source": {
@@ -816,7 +868,9 @@
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "stefk/jval": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": [],

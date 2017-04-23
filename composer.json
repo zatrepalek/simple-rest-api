@@ -1,6 +1,7 @@
 {
     "require": {
         "silex/silex": "^2.0",
-        "nette/database": "^2.4"
+        "nette/database": "^2.4",
+        "stefk/jval": "dev-master"
     }
 }
