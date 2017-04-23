@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace UserApi;
 
 use Lokhman\Silex\Provider\ConfigServiceProvider;
+use Nette\Database\Connection;
 use Silex\Application;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\HttpException;
@@ -34,6 +35,10 @@ class Configurator
         ]);
         $app['response.default'] = function () {
             return new SimpleResponse();
+        };
+        $app['db'] = function () use ($app) {
+            $config = $app['config']['database'];
+            return new Connection($config['dsn'], $config['user'], $config['password']);
         };
     }
 
