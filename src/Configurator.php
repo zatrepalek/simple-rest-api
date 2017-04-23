@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace UserApi;
 
+use Lokhman\Silex\Provider\ConfigServiceProvider;
 use Silex\Application;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\HttpException;
@@ -26,6 +27,9 @@ class Configurator
      */
     private static function configureServices(Application $app): void
     {
+        $app->register(new ConfigServiceProvider(), [
+            'config.dir' => __DIR__ . '/../app/config',
+        ]);
         $app['response.default'] = function () {
             return new SimpleResponse();
         };
