@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace UserApi\Controller;
 
+use JVal\Validator;
 use Nette\Database\ResultSet;
 use Silex\Application;
 use Symfony\Component\HttpFoundation\Request;
@@ -55,6 +56,28 @@ final class UserController
         );
     }
 
+    private function validateJson(Validator $validator, string $jsonSchemaFilename, SimpleResponse $defaultResponse): void
+    {
+        if ($this->requestBody === null) {
+            $this->throwInternalException();
+        }
+
+        $fileName = __DIR__ . '/../Schema/' . $jsonSchemaFilename;
+        if (!file_exists($fileName)) {
+            $this->throwInternalException();
+        }
+
+        $violations = $validator->validate(
+            $this->requestBody,
+            json_decode(file_get_contents($fileName))
+        );
+
+        if ($violations !== []) {
+            $defaultResponse->addErrors($violations);
+            $this->throwBadRequestException();
+        }
+    }
+
     /**
      * @param Request     $request
      * @param Application $app
@@ -69,24 +92,7 @@ final class UserController
         $response = $app['response.default'];
         $this->parseRequest($request);
 
-        if ($this->requestBody === null) {
-            $this->throwInternalException();
-        }
-
-        $fileName = __DIR__ . '/../Schema/UserCreateRequest.json';
-        if (!file_exists($fileName)) {
-            $this->throwInternalException();
-        }
-
-        $violations = $app['json.validator']->validate(
-            $this->requestBody,
-            json_decode(file_get_contents($fileName))
-        );
-
-        if ($violations !== []) {
-            $app['response.default']->addErrors($violations);
-            $this->throwBadRequestException();
-        }
+        $this->validateJson($app['json.validator'], 'UserCreateRequest.json', $app['response.default']);
 
         $id = $app['facades.user']->insertUser((array)$this->requestBody);
         $this->requestBody->id = $id;
@@ -128,6 +134,25 @@ final class UserController
         $rows = $app['facades.user']->getUsers();
 
         $response->setResponseBody((array)$rows->fetchAll());
+        $response->setStatusCode(IResponse::HTTP_CODE_OK);
+        return $response->build();
+    }
+
+    /**
+     * @param Request     $request
+     * @param Application $app
+     * @return Response
+     */
+    public function handleUpdate(Request $request, Application $app): Response
+    {
+        /** @var SimpleResponse $response */
+        $response = $app['response.default'];
+        $this->parseRequest($request);
+        $this->validateJson($app['json.validator'], 'UserUpdateRequest.json', $app['response.default']);
+
+        $row = $app['facades.user']->updateUser((array)$this->requestBody, (int)$request->get('id'));
+
+        $response->setResponseBody($row);
         $response->setStatusCode(IResponse::HTTP_CODE_OK);
         return $response->build();
     }

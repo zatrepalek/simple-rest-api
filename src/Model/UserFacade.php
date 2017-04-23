@@ -66,4 +66,35 @@ final class UserFacade
     {
         return $this->connection->query(sprintf('SELECT %s FROM `%s`', implode(',', self::RESOURCE_COLUMNS), self::TABLE_USER));
     }
+
+    /**
+     * @param array $data
+     * @param int   $id
+     * @return array
+     * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
+     */
+    public function updateUser(array $data, int $id): array
+    {
+        $result = $this->connection->query(
+            sprintf('SELECT %s FROM `%s` WHERE id =?', implode(',', self::RESOURCE_COLUMNS), self::TABLE_USER),
+            $id
+        );
+
+        if ($result->getRowCount() !== 1) {
+            throw new NotFoundHttpException(IResponse::MESSAGE_NOT_FOUND);
+        }
+        $row = (array)$result->fetch();
+
+        $this->connection->query(
+            sprintf('UPDATE `%s` SET ? WHERE id=?', self::TABLE_USER),
+            $data,
+            $id
+        );
+
+        foreach ($data as $key => $value) {
+            $row[$key] = $value;
+        }
+
+        return $row;
+    }
 }

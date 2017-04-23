@@ -1,0 +1,36 @@
+{
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 200
+    },
+    "email": {
+      "type": "string",
+      "format": "email"
+    },
+    "phone": {
+      "type": "integer",
+      "minimum": 100000000,
+      "maximum": 999999999
+    }
+  },
+  "anyOf": [
+    {
+      "required": [
+        "name"
+      ]
+    },
+    {
+      "required": [
+        "email"
+      ]
+    },
+    {
+      "required": [
+        "phone"
+      ]
+    }
+  ]
+}
