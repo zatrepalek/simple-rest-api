@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace UserApi\Model;
 
 use Nette\Database\Connection;
+use Nette\Database\ResultSet;
 use Nette\Database\Row;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use UserApi\Response\IResponse;
@@ -56,5 +57,13 @@ final class UserFacade
         }
 
         return $result->fetch();
+    }
+
+    /**
+     * @return ResultSet
+     */
+    public function getUsers(): ResultSet
+    {
+        return $this->connection->query(sprintf('SELECT %s FROM `%s`', implode(',', self::RESOURCE_COLUMNS), self::TABLE_USER));
     }
 }

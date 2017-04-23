@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace UserApi\Controller;
 
+use Nette\Database\ResultSet;
 use Silex\Application;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -109,6 +110,24 @@ final class UserController
         $row = $app['facades.user']->getUser((int)$request->get('id'));
 
         $response->setResponseBody((array)$row);
+        $response->setStatusCode(IResponse::HTTP_CODE_OK);
+        return $response->build();
+    }
+
+    /**
+     * @param Request     $request
+     * @param Application $app
+     * @return Response
+     * @throws \InvalidArgumentException
+     */
+    public function handleList(Request $request, Application $app): Response
+    {
+        /** @var SimpleResponse $response */
+        $response = $app['response.default'];
+        /** @var ResultSet $rows */
+        $rows = $app['facades.user']->getUsers();
+
+        $response->setResponseBody((array)$rows->fetchAll());
         $response->setStatusCode(IResponse::HTTP_CODE_OK);
         return $response->build();
     }
