@@ -1,4 +1,17 @@
 {
+    "name": "user-api",
+    "description": "Sample CRUD user REST API",
+    "autoload": {
+        "psr-4": {
+            "UserApi\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "UserApi\\": "src/",
+            "Tests\\": "tests/"
+        }
+    },
     "require": {
         "silex/silex": "^2.0",
         "nette/database": "^2.4",
