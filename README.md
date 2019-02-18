@@ -25,6 +25,18 @@ This ptoject is simple REST API for user CRUD operations.
 HTTP status codes are used as response codes. In case of error, json with array with key 'errors' is returned
 else empty json is returned. In case of any problem HTTTP 500 error is returned, otherwise see codes below.
 
+Sample request using curl:
+
+```
+curl -X POST 'http://localhost/users' -d '{"name": "Patrick Doe","email": "john@example.com","phone": 123456789}' -H "Content-Type: application/json"
+```
+
+Sample response:
+
+```
+{"name":"Patrick Doe","email":"john@example.com","phone":123456789,"id":1}
+```
+
 ### Create user
 
 - Method **POST**
