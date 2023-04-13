@@ -1,6 +1,6 @@
 # Simple REST API
 
-This project is simple REST API for user CRUD operations. It was created as sample project for a job interview in the past.
+This project is simple REST API for user CRUD operations. It was created as sample project for a job interview in the past (2017).
 
 ## Requirements
 
